@@ -57,6 +57,9 @@ var app = {
         let btnCheck = document.getElementById("checkPlayer");
         btnCheck.onclick = checkPlayer;
 
+        let btnErase = document.getElementById("erase_players");
+        btnErase.onclick = erasePlayers;
+
     }
 };
 
@@ -72,14 +75,17 @@ var pointsP2 = document.getElementById('points_p2');
 
 var divData = document.getElementById('player-data');
 var players = [];
+
+var divLinks = document.getElementById('enterLinks');
 myStorage = window.localStorage;
 if (typeof myStorage !== 'undefined') {
     if (myStorage.getItem('Players') === null) {} else {
         players = JSON.parse(myStorage.getItem('Players'));
         if (players.length >= 2) {
             showPlayersData(players.length);
-            document.getElementById('a_tateti').classList.remove("dissapear");
-            document.getElementById('a_memotest').classList.remove("dissapear");
+            divLinks.classList.remove('dissapear');
+            /* document.getElementById('a_tateti').classList.remove("dissapear");
+            document.getElementById('a_memotest').classList.remove("dissapear"); */
             /* divData.classList.add("dissapear"); */
         } else {
             showPlayersData(players.length);
@@ -96,6 +102,7 @@ function showPlayersData(n) {
     if (n != 0) {
         divPlayers.classList.remove('dissapear');
         divP1.classList.remove('dissapear');
+        divP2.classList.add('dissapear');
         imgP1.src = players[0].img;
         console.log(players[0].img);
         nameP1.innerText = "Nombre: " + players[0].name;
@@ -105,6 +112,7 @@ function showPlayersData(n) {
         if (n > 1) {
             divData.classList.add('dissapear');
             divP2.classList.remove('dissapear');
+            divLinks.classList.remove('dissapear');
             imgP2.src = players[1].img;
             console.log(players[1].img);
             nameP2.innerText = "Nombre: " + players[1].name;
@@ -113,6 +121,20 @@ function showPlayersData(n) {
             console.log(players[1].points);
         }
     }
+}
+
+function erasePlayers() {
+    divPlayers.classList.add('dissapear');
+    divData.classList.remove('dissapear');
+    divLinks.classList.add('dissapear');
+    myStorage.removeItem('Players');
+    players = [];
+    imgP1.src = "";
+    nameP1.innerText = "";
+    pointsP1.innerText = "";
+    imgP2.src = "";
+    nameP2.innerText = "";
+    pointsP2.innerText = "";
 }
 
 function checkPlayer() {
@@ -133,8 +155,9 @@ function checkPlayer() {
             navigator.notification.alert("Ingrese los datos correctamente", "", "Error", "De acuerdo");
         }
     } else {
-        document.getElementById('a_tateti').classList.remove("dissapear");
-        document.getElementById('a_memotest').classList.remove("dissapear");
+        divLinks.classList.remove('dissapear');
+        /* document.getElementById('a_tateti').classList.remove("dissapear");
+        document.getElementById('a_memotest').classList.remove("dissapear"); */
 
     }
 
