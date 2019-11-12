@@ -1,0 +1,17 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "Juegos PM2",
+  "short_name": "Juegos PM2",
+  "version": "io.cordova.hellocordova",
+  "description": "Trabajo Práctico Final. Programación Multimedial II. Licenciatura en Tecnología Multimedial. Universidad Maimónides 2019.",
+  "author": "Diego Salischiker",
+  "icons": [
+    {
+      "src": "res/icon.png",
+      "type": "image/png",
+      "sizes": "undefinedxundefined"
+    }
+  ],
+  "start_url": "index.html"
+}

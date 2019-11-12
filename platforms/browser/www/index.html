@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title>Portal de juegos</title>
+</head>
+
+<body>
+
+    <div id="container"></div>
+    <h1>Portal de juegos</h1>
+    <div class="player dissapear" id="players">
+        <div class="player dissapear" id="player1">
+            <img id="img_player1" class="img_player" src="" alt="photo">
+            <h3>Nombre jugador</h3>
+            <h4>Puntos</h4>
+        </div>
+        <div class="player dissapear" id="player2">
+            <img id="img_player2" class="img_player" src="" alt="photo">
+            <h3>Nombre jugador</h3>
+            <h4>Puntos</h4>
+        </div>
+    </div>
+    <div id="player-data">
+        <h2>Ingrese los datos del jugador </h2>
+        <div class="img">
+            <img id="myImage" alt="photo" class="not_loaded"
+                src="data:image/svg+xml;base64,
+                    PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiBjbGFzcz0iIj48Zz48cGF0aCBzdHlsZT0iZmlsbDojNEM0QzRDIiBkPSJNMzE4LjEzNiw0NTguNTE0SDQ5LjcwOXYtODQuNTA1YzAuMDYtNDEuMTU5LDMzLjQwNC03NC41MDMsNzQuNTYzLTc0LjU2M2g5Ny43MjdoNC45NzEgIGM4MS42NDIsMC4zMzgsMTQ4LjExMi02NS41NjYsMTQ4LjQ1LTE0Ny4yMTdjMC4zMzgtODEuNjUyLTY1LjU2Ni0xNDguMTAyLTE0Ny4yMTctMTQ4LjQ1UzgwLjEwMSw2OS4zNTQsNzkuNzUzLDE1MC45OTYgIGMtMC4xNDksMzYuMzc3LDEzLjExMyw3MS41MzEsMzcuMjYyLDk4Ljc0MUM1MS4yNSwyNTMuNjM1LTAuMDYsMzA4LjEzNSwwLDM3NC4wMDl2MTA5LjM1OWMwLDEzLjczLDExLjEyNSwyNC44NTQsMjQuODU0LDI0Ljg1NCAgaDI5My4yODJjMTMuNzMsMCwyNC44NTQtMTEuMTI1LDI0Ljg1NC0yNC44NTRTMzMxLjg2Niw0NTguNTE0LDMxOC4xMzYsNDU4LjUxNHogTTIyNi45Nyw1NC44NzkgIGM1My44NDUsMS41NDEsOTYuMjQ2LDQ2LjQyOCw5NC43MDUsMTAwLjI3MmMtMS40NDIsNTAuNjA0LTQxLjM3OCw5MS42OTMtOTEuOTIxLDk0LjU4NmgtNy43NTUgIGMtNTMuNzU1LTMuMzgtOTQuNTk2LTQ5LjY5OS05MS4yMTYtMTAzLjQ1NEMxMzMuOTg1LDk1LjMzMiwxNzUuOTI5LDU1LjQ3NiwyMjYuOTcsNTQuODc5eiIgZGF0YS1vcmlnaW5hbD0iI0ZGNDg1QSIgY2xhc3M9IiIgZGF0YS1vbGRfY29sb3I9IiNGRjQ4NUEiPjwvcGF0aD48Zz4KCTxwYXRoIHN0eWxlPSJmaWxsOiM2MDYwNjAiIGQ9Ik00ODcuMTQ2LDM5OC44NjRIMzM4LjAxOWMtMTMuNzMsMC0yNC44NTQtMTEuMTI1LTI0Ljg1NC0yNC44NTRzMTEuMTI1LTI0Ljg1NCwyNC44NTQtMjQuODU0ICAgaDE0OS4xMjZjMTMuNzMsMCwyNC44NTQsMTEuMTI1LDI0Ljg1NCwyNC44NTRTNTAwLjg3NSwzOTguODY0LDQ4Ny4xNDYsMzk4Ljg2NHoiIGRhdGEtb3JpZ2luYWw9IiNGRkJCQzAiIGNsYXNzPSJhY3RpdmUtcGF0aCIgZGF0YS1vbGRfY29sb3I9IiNGRkJCQzAiPjwvcGF0aD4KCTxwYXRoIHN0eWxlPSJmaWxsOiM2MDYwNjAiIGQ9Ik00MTIuNTgzLDQ3My40MjdjLTEzLjczLDAtMjQuODU0LTExLjEyNS0yNC44NTQtMjQuODU0VjI5OS40NDYgICBjMC0xMy43MywxMS4xMjUtMjQuODU0LDI0Ljg1NC0yNC44NTRzMjQuODU0LDExLjEyNSwyNC44NTQsMjQuODU0djE0OS4xMjZDNDM3LjQzNyw0NjIuMzAyLDQyNi4zMTIsNDczLjQyNyw0MTIuNTgzLDQ3My40Mjd6IiBkYXRhLW9yaWdpbmFsPSIjRkZCQkMwIiBjbGFzcz0iYWN0aXZlLXBhdGgiIGRhdGEtb2xkX2NvbG9yPSIjRkZCQkMwIj48L3BhdGg+CjwvZz48L2c+IDwvc3ZnPg==" />
+        </div>
+        <input type=" text" minlength=3 id="name" name="name" placeholder="Nombre" required pattern=".{3,20}">
+        <input type="text" minlength=3 id="nickname" name="nickname" placeholder="NickName" required pattern=".{3,20}">
+        <button type="submit" id="checkPlayer">Ingresar Jugador</button>
+    </div>
+    <div id="enterLinks">
+        <div id="a_tateti" class="button_cont dissapear"><a class="example_c" href="./tateti/index.html" target="_blank"
+                rel="nofollow noopener">TaTeTi</a></div>
+        <div id="a_memotest" class="button_cont dissapear"><a class="example_c" href="./memotest/index.html"
+                target="_blank" rel="nofollow noopener">Memotest</a></div>
+    </div>
+    <!-- <div id="deviceready" class="blink">
+            <p class="event listening">Connecting to Device</p>
+            <p class="event received">Device is Ready</p>
+        </div> -->
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
+
+</html>
