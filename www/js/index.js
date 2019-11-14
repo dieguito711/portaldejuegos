@@ -88,7 +88,6 @@ if (typeof myStorage !== 'undefined') {
             showPlayersData(players.length);
             //And display:none the form
             divLinks.classList.remove('dissapear');
-
         } else {
             //If there are less than 2 players, user have to add one more at least
             showPlayersData(players.length);
