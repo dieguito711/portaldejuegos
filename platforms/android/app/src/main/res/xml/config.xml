@@ -10,6 +10,12 @@
     <feature name="Notification">
         <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
     </feature>
+    <feature name="CDVOrientation">
+        <param name="android-package" value="cordova.plugins.screenorientation.CDVOrientation" />
+    </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
     <name>Juegos PM2</name>
     <description>
         Trabajo Práctico Final. Programación Multimedial II. Licenciatura en Tecnología Multimedial. Universidad Maimónides 2019.

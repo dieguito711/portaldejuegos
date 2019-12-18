@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./assets/css/syles.css">
+    <script src="./assets/js/jquery-3.4.1.min.js"></script>
+    <title>Generala</title>
+</head>
+
+<body>
+    <div id="winDiv" class="invisible">
+        <div id="results" class="invisible">
+            <div id="results_p1">
+                <h2 id="name_p1">Player 1</h2>
+                <h3 id="points_p1">Points</h3>
+            </div>
+            <div id="results_p2">
+                <h2 id="name_p2">Player 2</h2>
+                <h3 id="points_p2">Points</h3>
+            </div>
+        </div>
+    </div>
+    <div id=overlay class="disappear" onclick="closeInfo()">
+        <div id="info">
+            <p>Apretá en los dados que quieras mantener en juego</p>
+            <div id="info_imgs">
+                <img src="./assets/res/img/6.svg" alt="dado">
+                <img src="./assets/res/img/6.svg" alt="dado" class="selected">
+            </div>
+            <p>Podés sumar en cualquier momento apretando en el recuadro correspondiente a cada juego.</p>
+            <div id="info_juego">
+                <div class="fix">Poker</div>
+                <div id="pokerp2" class="points p2" onclick="">-</div>
+            </div>
+        </div>
+        <p id="close_overlay">Cerrar</p>
+    </div>
+    <div id="header">
+        <button class="header_button" id="button_restart" type="submit" onclick="restart()">Reset</button>
+        <h1>Generala</h1>
+        <button class="header_button" id="button_info" type="submit" onclick="showInfo()">Info</button>
+    </div>
+
+    <div id="dice_container">
+        <!-- Dices imgs are loaded here -->
+    </div>
+    <button id="button_throw" type="submit" onclick="throwDices()">Lanzar 1er tiro</button>
+    <div id="gameState">
+        <div id="grid" class="invisible">
+            <div class="grid_container" id="juegos">
+                <div class="fix">Juegos</div>
+                <div class="fix">1</div>
+                <div class="fix">2</div>
+                <div class="fix">3</div>
+                <div class="fix">4</div>
+                <div class="fix">5</div>
+                <div class="fix">6</div>
+                <div class="fix">Escalera</div>
+                <div class="fix">Full</div>
+                <div class="fix">Póker</div>
+                <div class="fix">Generala</div>
+            </div>
+            <div class="grid_container" id="p1">
+                <div id="namep1" class="fix">Player 1</div>
+                <div id="1p1" class="points p1 " onclick="check1()">-</div>
+                <div id="2p1" class="points p1" onclick="check2()">-</div>
+                <div id="3p1" class="points p1" onclick="check3()">-</div>
+                <div id="4p1" class="points p1" onclick="check4()">-</div>
+                <div id="5p1" class="points p1" onclick="check5()">-</div>
+                <div id="6p1" class="points p1" onclick="check6()">-</div>
+                <div id="escalerap1" class="points p1" onclick="checkEscalera()">-</div>
+                <div id="fullp1" class="points p1" onclick="checkFull()">-</div>
+                <div id="pokerp1" class="points p1" onclick="checkPoker()">-</div>
+                <div id="generalap1" class="points p1" onclick="checkGenerala()">-</div>
+            </div>
+            <div class="grid_container invisible" id="p2">
+                <div id="namep2" class="fix p2">Player 2</div>
+                <div id="1p2" class="points p2" onclick="check1()">-</div>
+                <div id="2p2" class="points p2" onclick="check2()">-</div>
+                <div id="3p2" class="points p2" onclick="check3()">-</div>
+                <div id="4p2" class="points p2" onclick="check4()">-</div>
+                <div id="5p2" class="points p2" onclick="check5()">-</div>
+                <div id="6p2" class="points p2" onclick="check6()">-</div>
+                <div id="escalerap2" class="points p2" onclick="checkEscalera()">-</div>
+                <div id="fullp2" class="points p2" onclick="checkFull()">-</div>
+                <div id="pokerp2" class="points p2" onclick="checkPoker()">-</div>
+                <div id="generalap2" class="points p2" onclick="checkGenerala()">-</div>
+            </div>
+        </div>
+
+    </div>
+    <script src="./assets/js/app.js"></script>
+</body>
+
+</html>

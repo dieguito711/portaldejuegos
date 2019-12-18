@@ -45,6 +45,28 @@ module.exports = [
         "merges": [
             "navigator.notification"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-screen-orientation/www/screenorientation.js",
+        "id": "cordova-plugin-screen-orientation.screenorientation",
+        "pluginId": "cordova-plugin-screen-orientation",
+        "clobbers": [
+            "cordova.plugins.screenorientation"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-device/www/device.js",
+        "id": "cordova-plugin-device.device",
+        "pluginId": "cordova-plugin-device",
+        "clobbers": [
+            "device"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-device/src/browser/DeviceProxy.js",
+        "id": "cordova-plugin-device.DeviceProxy",
+        "pluginId": "cordova-plugin-device",
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -52,7 +74,9 @@ module.exports.metadata =
 {
     "cordova-plugin-whitelist": "1.3.4",
     "cordova-plugin-camera": "4.1.0",
-    "cordova-plugin-dialogs": "2.0.2"
+    "cordova-plugin-dialogs": "2.0.2",
+    "cordova-plugin-screen-orientation": "3.0.2",
+    "cordova-plugin-device": "2.0.3"
 }
 // BOTTOM OF METADATA
 });

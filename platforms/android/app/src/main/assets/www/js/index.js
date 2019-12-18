@@ -48,13 +48,13 @@ var app = {
         let btnCheck = document.getElementById("checkPlayer");
         btnCheck.onclick = checkPlayer;
 
-        let btnErase = document.getElementById("erase_players");
-        btnErase.onclick = erasePlayers;
+        /* let btnErase = document.getElementById("erase_players");
+        btnErase.onclick = erasePlayers; */
 
-        let btnEdit1 = document.getElementById('edit_p1');
+        let btnEdit1 = document.getElementById('div_p1');
         btnEdit1.onclick = editP1;
 
-        let btnEdit2 = document.getElementById('edit_p2');
+        let btnEdit2 = document.getElementById('div_p2');
         btnEdit2.onclick = editP2;
 
         let btnCancelEdit = document.getElementById('cancel_edit');
@@ -62,6 +62,9 @@ var app = {
     }
 };
 //Elements and variables for future control
+var audioButton = new Audio('./audio/button.mp3');
+var audioCorrect = new Audio('./audio/correct2.wav');
+var audioWrong = new Audio('./audio/wrong2.wav');
 var divPlayers = document.getElementById('players');
 var divP1 = document.getElementById('div_p1');
 var divP2 = document.getElementById('div_p2');
@@ -71,14 +74,48 @@ var nameP1 = document.getElementById('name_p1');
 var nameP2 = document.getElementById('name_p2');
 var pointsP1 = document.getElementById('points_p1');
 var pointsP2 = document.getElementById('points_p2');
-var btnErase = document.getElementById("erase_players");
+/* var btnErase = document.getElementById("erase_players"); */
 var divData = document.getElementById('player-data');
 var divLinks = document.getElementById('enterLinks');
 var players = [];
 //Variable to know which player is on editing mode
 var editingPlayers = true; //TRUE = P1, FALSE = P2
+
+//Loading
+setTimeout(function () {
+    myStorage = window.localStorage;
+    if (typeof myStorage !== 'undefined') {
+        if (myStorage.getItem('Players') === null) {
+            divData.classList.remove('dissapear');
+            console.log("log0.5");
+        } else {
+            players = JSON.parse(myStorage.getItem('Players'));
+            //If there are already 2 players
+            if (players.length >= 2) {
+                //Show them on their respective divs
+                showPlayersData(players.length);
+                //And display:none the form
+                divLinks.classList.remove('dissapear');
+            } else {
+                //If there are less than 2 players, user have to add one more at least
+                divData.classList.remove('dissapear');
+                console.log("log1");
+                showPlayersData(players.length);
+            }
+            /* divData.classList.remove('dissapear');
+            console.log("log2"); */
+        }
+    } else {
+        /* divData.classList.remove('dissapear');
+        console.log("log3"); */
+        // localStorage not defined
+    }
+    document.getElementById('loader').classList.add('dissapear');
+}, 1000);
+
+
 //LocalStorage
-myStorage = window.localStorage;
+/* myStorage = window.localStorage;
 if (typeof myStorage !== 'undefined') {
     if (myStorage.getItem('Players') === null) {} else {
         players = JSON.parse(myStorage.getItem('Players'));
@@ -95,14 +132,14 @@ if (typeof myStorage !== 'undefined') {
     }
 } else {
     // localStorage not defined
-}
+} */
 
 app.initialize();
 //Function to show the divs with each player data (img, name and points) It receives the amount of players loaded
 function showPlayersData(n) {
     if (n != 0) {
         divPlayers.classList.remove('dissapear');
-        btnErase.classList.remove('dissapear');
+        /* btnErase.classList.remove('dissapear'); */
         divP1.classList.remove('dissapear');
         divP2.classList.add('dissapear');
         imgP1.src = players[0].img;
@@ -119,13 +156,14 @@ function showPlayersData(n) {
             console.log(players[1].img);
             nameP2.innerText = players[1].name;
             console.log(players[1].name);
-            pointsP2.innerText = "Puntos :" + players[1].points;
+            pointsP2.innerText = "Puntos: " + players[1].points;
             console.log(players[1].points);
         }
     }
 }
 //Function to edit the data from Player 1
 function editP1() {
+    audioButton.play();
     divP1.classList.add('dissapear');
     divP2.classList.add('dissapear');
     divData.classList.remove('dissapear');
@@ -139,6 +177,7 @@ function editP1() {
 }
 //Function to edit the data from Player 2
 function editP2() {
+    audioButton.play();
     divP1.classList.add('dissapear');
     divP2.classList.add('dissapear');
     divData.classList.remove('dissapear');
@@ -152,6 +191,7 @@ function editP2() {
 }
 //Function to cancel the current editing
 function cancelEdit() {
+    audioWrong.play();
     document.getElementById('name').value = "";
     document.getElementById('nickname').value = "";
     document.getElementById('myImage').src = "./img/camera.svg";
@@ -162,8 +202,9 @@ function cancelEdit() {
 }
 //Function to erase all the players in local storage
 function erasePlayers() {
+    audioWrong.play();
     divPlayers.classList.add('dissapear');
-    btnErase.classList.add('dissapear');
+    /* btnErase.classList.add('dissapear'); */
     divData.classList.remove('dissapear');
     divLinks.classList.add('dissapear');
     myStorage.clear();
@@ -186,13 +227,22 @@ function checkPlayer() {
                 points: 0,
             };
             players.push(player);
-            showPlayersData(players.length);
+            /* showPlayersData(players.length); */
             myStorage.setItem('Players', JSON.stringify(players));
             if (players.length >= 2) {
+                divData.classList.add('dissapear');
                 divLinks.classList.remove('dissapear');
+                showPlayersData(players.length);
+            } else {
+                console.log("Estoy en else para limpiar inputs");
+                document.getElementById('name').value = '';
+                document.getElementById('nickname').value = '';
+                document.getElementById('myImage').src = './img/camera.svg';
             }
+            audioCorrect.play();
         } else {
             console.log("Ingrese bien los datos");
+            audioWrong.play();
             navigator.notification.alert("Ingrese los datos correctamente", "", "Error", "De acuerdo");
         }
     } else {

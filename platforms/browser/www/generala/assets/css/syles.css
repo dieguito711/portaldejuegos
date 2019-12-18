@@ -1,0 +1,520 @@
+/* RESET */
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* FIN RESET */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    display: flex;
+    height: 100%;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    width: 100%;
+    flex: 1;
+    margin: 0 auto;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 1em 0 1em;
+}
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 1em 0;
+}
+
+#overlay {
+    widows: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.704);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+#info {
+    margin: 0 auto;
+    width: 80%;
+    height: 60%;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+#info_imgs {
+    width: 150px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#info_imgs img {
+    width: 60px;
+    height: 60px;
+}
+
+#info p {
+    text-align: center;
+}
+
+#info_juego {
+    display: flex;
+    text-align: center;
+    width: 100px;
+    justify-content: space-between;
+}
+
+.disappear {
+    display: none !important;
+}
+
+.fade-in {
+    animation: fadeIn ease 1s;
+    -webkit-animation: fadeIn ease 1s;
+    -moz-animation: fadeIn ease 1s;
+    -o-animation: fadeIn ease 1s;
+    -ms-animation: fadeIn ease 1s;
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+#close_overlay {
+    margin-top: 2em;
+    height: 3em;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #fff;
+    transition: all 0.3s ease 0s;
+}
+
+.header_button {
+    width: 75px;
+    height: 3em;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #ccc;
+    border: 2px solid #ccc;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+.header_button:active {
+    transform: translateY(5px);
+}
+
+#dice_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1em auto;
+    width: 80%;
+}
+
+.selected {
+    border: 2px solid greenyellow;
+}
+
+#button_throw {
+    margin: 1em auto;
+    width: 200px;
+    height: 3em;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: white;
+    background-color: #2EE59D;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+/* #button_throw:hover {
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+} */
+#button_throw:active {
+    transform: translateY(5px);
+}
+
+#instruction {
+    margin: 1em auto;
+    text-align: center;
+}
+
+.invisible {
+    display: none !important;
+}
+
+#grid {
+    margin: 0 auto;
+    width: 70%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 2px solid rgb(187, 187, 187);
+    padding: 0.5em;
+    gap: 0.3em;
+    color: rgb(68, 68, 68);
+}
+
+.grid_container {
+    margin: 0 1em 0 1em;
+}
+
+.fix {
+    font-weight: bold;
+    padding: 0.8em 0 0.8em 0;
+    text-align: left;
+}
+
+#juegos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.points {
+    width: 2.5em;
+    margin: 0.5em 0 0 0;
+    padding: 0.5em;
+    border: 1px solid rgb(187, 187, 187);
+    cursor: pointer;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    /* border-bottom: 2px solid black; */
+}
+
+.points:hover {
+    border: 1px solid greenyellow;
+}
+
+.disable {
+    background-color: rgb(224, 224, 224);
+    color: rgb(119, 119, 119);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.0);
+}
+
+.disable:hover {
+    background-color: rgb(224, 224, 224);
+    color: rgb(119, 119, 119);
+    cursor: not-allowed;
+}
+
+.choose {
+    background-color: white;
+    color: #2EE59D;
+}
+
+img {
+    margin: 0 auto;
+    width: 13%;
+    height: auto;
+}
+
+#results {
+    display: flex;
+    margin: 5em auto;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+}
+
+#results_p1 {
+    margin: 0 auto;
+}
+
+
+
+#results_p1 h2 {
+    margin-bottom: 1em;
+    font-weight: bold;
+}
+
+#results_p1 h3 {
+    text-align: center;
+}
+
+#results_p2 {
+    margin: 0 auto;
+}
+
+#results_p2 h3 {
+    text-align: center;
+}
+
+#results_p2 h2 {
+    margin-bottom: 1em;
+    font-weight: bold;
+}
+
+
+#winDiv {
+    z-index: 100;
+    top: 7%;
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    padding-bottom: 2em;
+    background-color: rgba(0, 0, 0, 0.704);
+    /* border-radius: 1em; */
+    color: white;
+    position: absolute;
+    /* left: 5%; */
+    -webkit-animation: fadein 2s;
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#winDiv h1 {
+    font-size: 3em;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#winDiv p {
+    padding: 19%;
+    text-align: center;
+}
+
+#winDiv span {
+    background-color: white;
+    color: #085f63;
+    border-radius: 1em;
+    padding: 2em;
+    cursor: pointer;
+    position: absolute;
+    bottom: 25%;
+    left: 18.5%;
+}
+
+#winDiv span:hover {
+    background-color: #085f63;
+    color: white;
+}
