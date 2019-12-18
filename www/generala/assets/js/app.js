@@ -59,6 +59,7 @@ if (typeof myStorage !== 'undefined') {
         $('#namep2').text(player2.name);
     } else {
         //There is a game saved
+        //Load
         var generala = JSON.parse(myStorage.getItem('Generala'));
         player1 = new Player(generala.Player1.name, generala.Player1.points);
         player2 = new Player(generala.Player2.name, generala.Player2.points);
@@ -84,14 +85,12 @@ if (typeof myStorage !== 'undefined') {
         player2.generala = generala.Player2.generala;
         turn = generala.Turn;
         turnsPlayed = generala.TurnsPlayed;
-        console.log("Cargados players de localStorage");
         /* boardSize = parseInt(memotest.Size);
         player1.pairs = memotest.Player1.pairs;
         player2.pairs = memotest.Player2.pairs; */
         drawGridStorage(generala);
         $('#namep1').text(player1.name);
         $('#namep2').text(player2.name);
-        console.log(player1.name, player2.name);
     }
 
 } else {
@@ -206,7 +205,7 @@ function drawGridStorage(generala) {
 /* Function that calls the specific function for the turn at play (1st, 2nd or 3rd) */
 function throwDices() {
     if (disableClicks) {
-        console.log("entré a if");
+        //If disableClicks == true, it means a score has been clicked, so the play is over and a new turn has to start
         changeTurn();
         $("#dice_container").empty();
         $('#button_throw').text('Lanzar 1er tiro');
@@ -271,7 +270,6 @@ function firstThrow() {
         //push myDice to the dices Array
         diceArray.push(myDice);
     }
-
     audioDices.play();
     //Sorts diceArray to test with regex
     diceArray.sort(compare);
@@ -281,7 +279,7 @@ function firstThrow() {
         //append the <img> to the HTML string
         imgsHTML += "<img id='img" + JSON.stringify(i) + "' src='" + dice.img + "' alt='Dado' class='dice' onclick='select(" + JSON.stringify(i) + ")'>";
     }
-    //apends HTML string to div
+    //appends HTML string to div
     $("#dice_container").append(imgsHTML);
     //Next throw
     throwN++;
@@ -410,7 +408,7 @@ function win() {
     $('#points_p2').text(JSON.stringify(player2.points));
     $('#name_p1').text(player1.name);
     $('#name_p2').text(player2.name);
-    //Erase Generala from localStorage because the match ended
+    //Erase Generala from localStorage because the match has ended
     myStorage.removeItem('Generala');
 }
 
@@ -454,7 +452,7 @@ function showInfo() {
     $('#overlay').removeClass('disappear');
     $('#overlay').addClass('fade-in');
 }
-
+//Hide div with instructions
 function closeInfo() {
     $('#overlay').addClass('disappear');
     $('#overlay').removeClass('fade-in');
@@ -501,7 +499,6 @@ function check1() {
     } else {
         audioCheckScore.play();
         disableClicks = true;
-        /* strValues = ''; */
         strValues = checkGame();
         var points = (strValues.match(/1/g) || []).length;
         /* popUp(points); */
@@ -519,7 +516,6 @@ function check1() {
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
-        /* strValues = ''; */
     }
 }
 
@@ -529,7 +525,6 @@ function check2() {
     } else {
         audioCheckScore.play();
         disableClicks = true;
-        /* strValues = ''; */
         strValues = checkGame();
         var points = (strValues.match(/2/g) || []).length;
         console.log(points);
@@ -546,7 +541,6 @@ function check2() {
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
-        /* strValues = ''; */
     }
 }
 
@@ -556,7 +550,6 @@ function check3() {
     } else {
         audioCheckScore.play();
         disableClicks = true;
-        /* strValues = ''; */
         strValues = checkGame();
         var points = (strValues.match(/3/g) || []).length;
         console.log(points);
@@ -573,7 +566,6 @@ function check3() {
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
-        /* strValues = ''; */
     }
 }
 
@@ -583,7 +575,6 @@ function check4() {
     } else {
         audioCheckScore.play();
         disableClicks = true;
-        /* strValues = ''; */
         strValues = checkGame();
         var points = (strValues.match(/4/g) || []).length;
         console.log(points);
@@ -600,7 +591,6 @@ function check4() {
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
-        /* strValues = ''; */
     }
 }
 
@@ -610,7 +600,6 @@ function check5() {
     } else {
         audioCheckScore.play();
         disableClicks = true;
-        /* strValues = ''; */
         strValues = checkGame();
         var points = (strValues.match(/5/g) || []).length;
         console.log(points);
@@ -627,7 +616,6 @@ function check5() {
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
-        /* strValues = ''; */
     }
 }
 
@@ -637,7 +625,6 @@ function check6() {
     } else {
         audioCheckScore.play();
         disableClicks = true;
-        /* strValues = ''; */
         strValues = checkGame();
         var points = (strValues.match(/6/g) || []).length;
         console.log(points);
@@ -654,7 +641,6 @@ function check6() {
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
-        /* strValues = ''; */
     }
 }
 
@@ -664,7 +650,6 @@ function checkEscalera() {
     } else {
         audioCheckScore.play();
         disableClicks = true;
-        /* strValues = ''; */
         strValues = checkGame();
         if (escaleraRegex.test(strValues) === true) {
             if (throwN === 2) {
@@ -706,7 +691,6 @@ function checkEscalera() {
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
-        /* strValues = ''; */
     }
 }
 
@@ -716,7 +700,6 @@ function checkFull() {
     } else {
         audioCheckScore.play();
         disableClicks = true;
-        /* strValues = ''; */
         strValues = checkGame();
         if (fullRegex2.test(strValues) === true) {
             console.log("estoy en true full");
@@ -761,7 +744,6 @@ function checkFull() {
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
-        /* strValues = ''; */
     }
 }
 
@@ -771,7 +753,6 @@ function checkPoker() {
     } else {
         audioCheckScore.play();
         disableClicks = true;
-        /* strValues = ''; */
         strValues = checkGame();
         if (pokerRegex.test(strValues) === true) {
             console.log("estoy en true poker");
@@ -817,7 +798,6 @@ function checkPoker() {
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
-        /* strValues = ''; */
     }
 }
 
@@ -827,7 +807,6 @@ function checkGenerala() {
     } else {
         audioCheckScore.play();
         disableClicks = true;
-        /* strValues = ''; */
         strValues = checkGame();
         if (generalaRegex.test(strValues) === true) {
             if (throwN === 2) {
@@ -870,7 +849,6 @@ function checkGenerala() {
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
-        /* strValues = ''; */
     }
 }
 

@@ -455,6 +455,8 @@ img {
 
 
 #results_p1 h2 {
+    text-align: center;
+    font-size: 1.5em;
     margin-bottom: 1em;
     font-weight: bold;
 }
@@ -472,6 +474,8 @@ img {
 }
 
 #results_p2 h2 {
+    text-align: center;
+    font-size: 1.5em;
     margin-bottom: 1em;
     font-weight: bold;
 }
@@ -480,6 +484,7 @@ img {
 #winDiv {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     z-index: 100;
     width: 100%;
     margin: 0 auto;
@@ -515,7 +520,7 @@ img {
 }
 
 #winDiv span {
-    padding: 2em;
+    padding: 1.5em;
     margin: 1em auto;
     font-family: 'Roboto', sans-serif;
     font-size: 0.8em;
@@ -535,4 +540,9 @@ img {
 /* #winDiv span:hover {
     background-color: #085f63;
     color: white;
+} */
+/* @media(orientation:landscape) {
+    body {
+        overflow: hidden;
+    }
 } */
