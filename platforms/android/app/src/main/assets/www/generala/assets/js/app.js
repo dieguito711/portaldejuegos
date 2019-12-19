@@ -15,7 +15,7 @@ var disableClicks = false;
 //Regex to test games
 var generalaRegex = /1{5}|2{5}|3{5}|4{5}|5{5}|6{5}/;
 var escaleraRegex = /12345|23456|13456/;
-var pokerRegex = /1{4}|2{4}|3{4}|4{4}|5{4}|6{4}/;
+var pokerRegex = /1{4}(2|3|4|5|6)|((12{4})|(2{4}(3|4|5|6)))|(((1|2)3{4})|(3{4}(4|5|6)))|(((1|2|3)4{4})|(4{4}(5|6)))|(((1|2|3|4)5{4})|(5{4}6))|(1|2|3|4|5)6{4}/;
 var fullRegex = /(1{2})(2{3}|3{3}|4{3}|5{3}|6{3})|(1{3})(2{2}|3{2}|4{2}|5{2}|6{2})|(2{2})(3{3}|4{3}|5{3}|6{3})|(2{3})(3{2}|4{2}|5{2}|6{2})|(3{2})(4{3}|5{3}|6{3})|(3{3})(4{2}|5{2}|6{2})|(4{2})(5{3}|6{3})|(4{3})(5{2}|6{2})|(5{2})(6{3})|(5{3})(6{2})/;
 var fullRegex2 = /(.)\1{2}(.)\2|(.)\3(.)\4{2}/;
 // Constructor function for Dice objects
@@ -101,32 +101,32 @@ if (typeof myStorage !== 'undefined') {
 function drawGridStorage(generala) {
     //PLAYER1
     if (player1.one !== -1) {
-        var el = $("#1p1");
+        var el = $("#onep1");
         el.removeAttr('onclick');
         el.text(JSON.stringify(player1.one));
     }
     if (player1.two !== -1) {
-        var el = $("#2p1");
+        var el = $("#twop1");
         el.removeAttr('onclick');
         el.text(JSON.stringify(player1.two));
     }
     if (player1.three !== -1) {
-        var el = $("#3p1");
+        var el = $("#threep1");
         el.removeAttr('onclick');
         el.text(JSON.stringify(player1.three));
     }
     if (player1.four !== -1) {
-        var el = $("#4p1");
+        var el = $("#fourp1");
         el.removeAttr('onclick');
         el.text(JSON.stringify(player1.four));
     }
     if (player1.five !== -1) {
-        var el = $("#5p1");
+        var el = $("#fivep1");
         el.removeAttr('onclick');
         el.text(JSON.stringify(player1.five));
     }
     if (player1.six !== -1) {
-        var el = $("#6p1");
+        var el = $("#sixp1");
         el.removeAttr('onclick');
         el.text(JSON.stringify(player1.six));
     }
@@ -152,32 +152,32 @@ function drawGridStorage(generala) {
     }
     //PLAYER2
     if (player2.one !== -1) {
-        var el = $("#1p2");
+        var el = $("#onep2");
         el.removeAttr('onclick');
         el.text(JSON.stringify(player2.one));
     }
     if (player2.two !== -1) {
-        var el = $("#2p2");
+        var el = $("#twop2");
         el.removeAttr('onclick');
         el.text(JSON.stringify(player2.two));
     }
     if (player2.three !== -1) {
-        var el = $("#3p2");
+        var el = $("#threep2");
         el.removeAttr('onclick');
         el.text(JSON.stringify(player2.three));
     }
     if (player2.four !== -1) {
-        var el = $("#4p2");
+        var el = $("#fourp2");
         el.removeAttr('onclick');
         el.text(JSON.stringify(player2.four));
     }
     if (player2.five !== -1) {
-        var el = $("#5p2");
+        var el = $("#fivep2");
         el.removeAttr('onclick');
         el.text(JSON.stringify(player2.five));
     }
     if (player2.six !== -1) {
-        var el = $("#6p2");
+        var el = $("#sixp2");
         el.removeAttr('onclick');
         el.text(JSON.stringify(player2.six));
     }
@@ -240,7 +240,7 @@ function firstThrow() {
     //Starts a for loop for all the dices (5)
     for (let i = 0; i < 5; i++) {
         //Gets the random value for Dice
-        var value = 6;
+        var value = rnd();
         var imagePath = '';
         //Depending on the value, assign the correct image to imagePath
         switch (value) {
@@ -406,9 +406,9 @@ function win() {
     $('#dice_container').addClass('invisible');
     $('#p1').removeClass('invisible');
     $('#p2').removeClass('invisible');
-    $('#juegos').append("<div class='fix'>TOTAL</div>");
+    /* $('#juegos').append("<div class='fix'>TOTAL</div>");
     $('#p1').append("<p class='points_total'>" + JSON.stringify(player1.points) + "</p>")
-    $('#p2').append("<p class='points_total'>" + JSON.stringify(player2.points) + "</p>")
+    $('#p2').append("<p class='points_total'>" + JSON.stringify(player2.points) + "</p>") */
     $('#points_p1').text(JSON.stringify(player1.points));
     $('#points_p2').text(JSON.stringify(player2.points));
     $('#name_p1').text(player1.name);
@@ -483,7 +483,55 @@ function restart() {
     Array.prototype.forEach.call(els, function (el) {
         // Do stuff here
         el.innerHTML = '-';
+        console.log(el.onclick);
     });
+    reassignOnClicks();
+}
+
+function reassignOnClicks() {
+    for (let i = 1; i <= 10; i++) {
+        switch (i) {
+            case 1:
+                document.getElementById('onep1').onclick = check1New;
+                document.getElementById('onep2').onclick = check1New;
+                break;
+            case 2:
+                document.getElementById('twop1').onclick = check2New;
+                document.getElementById('twop2').onclick = check2New;
+                break;
+            case 3:
+                document.getElementById('threep1').onclick = check3New;
+                document.getElementById('threep2').onclick = check3New;
+                break;
+            case 4:
+                document.getElementById('fourp1').onclick = check4New;
+                document.getElementById('fourp2').onclick = check4New;
+                break;
+            case 5:
+                document.getElementById('fivep1').onclick = check5New;
+                document.getElementById('fivep2').onclick = check5New;
+                break;
+            case 6:
+                document.getElementById('sixp1').onclick = check6New;
+                document.getElementById('sixp2').onclick = check6New;
+                break;
+            case 7:
+                document.getElementById('escalerap1').onclick = checkEscaleraNew;
+                document.getElementById('escalerap2').onclick = checkEscaleraNew;
+                break;
+            case 8:
+                document.getElementById('fullp1').onclick = checkFullNew;
+                document.getElementById('fullp2').onclick = checkFullNew;
+                break;
+            case 9:
+                document.getElementById('pokerp1').onclick = checkPokerNew;
+                document.getElementById('pokerp2').onclick = checkPokerNew;
+                break;
+            default:
+                document.getElementById('generalap1').onclick = checkGeneralaNew;
+                document.getElementById('generalap2').onclick = checkGeneralaNew;
+        }
+    }
 }
 
 function popUp(points) {
@@ -498,348 +546,231 @@ function popUp(points) {
     );
 }
 //FUNCTIONS CALLED WHEN GAME SELECTED (1|2|3|4|5|6|Escalera|Full|Poker|Generala)
-function check1() {
+function check1New() {
+    console.log("check1New");
     if (!disableClicks) {
         audioCheckScore.play();
         disableClicks = true;
+        var pointsPlay;
         strValues = checkGame();
         var points = (strValues.match(/1/g) || []).length;
-        /* popUp(points); */
-        console.log(points);
+        pointsPlay = points;
         if (turn) {
-            var el = $("#1p1");
-            player1.one = points;
-            el.removeAttr('onclick');
-            el.text(JSON.stringify(player1.one));
+            checkTurn(player1, 1, 'one', pointsPlay);
         } else {
-            var el = $("#1p2");
-            player2.one = points;
-            el.removeAttr('onclick');
-            el.text(JSON.stringify(player2.one));
+            checkTurn(player2, 2, 'one', pointsPlay);
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
     }
 }
 
-function check2() {
+function check2New() {
+    console.log("check2New");
     if (!disableClicks) {
         audioCheckScore.play();
         disableClicks = true;
+        var pointsPlay;
         strValues = checkGame();
         var points = (strValues.match(/2/g) || []).length;
-        console.log(points);
+        pointsPlay = points * 2;
         if (turn) {
-            var el = $("#2p1");
-            player1.two = points * 2;
-            el.removeAttr('onclick');
-            el.text(JSON.stringify(player1.two));
+            checkTurn(player1, 1, 'two', pointsPlay);
         } else {
-            var el = $("#2p2");
-            player2.two = points * 2;
-            el.removeAttr('onclick');
-            el.text(JSON.stringify(player2.two));
+            checkTurn(player2, 2, 'two', pointsPlay);
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
     }
 }
 
-function check3() {
+function check3New() {
+    console.log("check3New");
     if (!disableClicks) {
         audioCheckScore.play();
         disableClicks = true;
+        var pointsPlay;
         strValues = checkGame();
         var points = (strValues.match(/3/g) || []).length;
-        console.log(points);
+        pointsPlay = points * 3;
         if (turn) {
-            var el = $("#3p1");
-            player1.three = points * 3;
-            el.removeAttr('onclick');
-            el.text(JSON.stringify(player1.three));
+            checkTurn(player1, 1, 'three', pointsPlay);
         } else {
-            var el = $("#3p2");
-            player2.three = points * 3;
-            el.removeAttr('onclick');
-            el.text(JSON.stringify(player2.three));
+            checkTurn(player2, 2, 'three', pointsPlay);
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
     }
 }
 
-function check4() {
+function check4New() {
+    console.log("check4New");
     if (!disableClicks) {
         audioCheckScore.play();
         disableClicks = true;
+        var pointsPlay;
         strValues = checkGame();
-        var points = (strValues.match(/4/g) || []).length;
-        console.log(points);
+        var points;
+        points = (strValues.match(/4/g) || []).length;
+        pointsPlay = points * 4;
         if (turn) {
-            var el = $("#4p1");
-            player1.four = points * 4;
-            el.removeAttr('onclick');
-            el.text(JSON.stringify(player1.four));
+            checkTurn(player1, 1, 'four', pointsPlay);
         } else {
-            var el = $("#4p2");
-            player2.four = points * 4;
-            el.removeAttr('onclick');
-            el.text(JSON.stringify(player2.four));
+            checkTurn(player2, 2, 'four', pointsPlay);
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
     }
 }
 
-function check5() {
+function check5New() {
+    console.log("check5New");
     if (!disableClicks) {
         audioCheckScore.play();
         disableClicks = true;
+        var pointsPlay;
         strValues = checkGame();
         var points = (strValues.match(/5/g) || []).length;
-        console.log(points);
+        pointsPlay = points * 5;
         if (turn) {
-            var el = $("#5p1");
-            player1.five = points * 5;
-            el.removeAttr('onclick');
-            el.text(JSON.stringify(player1.five));
+            checkTurn(player1, 1, 'five', pointsPlay);
         } else {
-            var el = $("#5p2");
-            player2.five = points * 5;
-            el.removeAttr('onclick');
-            el.text(JSON.stringify(player2.five));
+            checkTurn(player2, 2, 'five', pointsPlay);
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
     }
 }
 
-function check6() {
+function check6New() {
+    console.log("check6New");
     if (!disableClicks) {
         audioCheckScore.play();
         disableClicks = true;
+        var pointsPlay;
         strValues = checkGame();
         var points = (strValues.match(/6/g) || []).length;
-        console.log(points);
+        pointsPlay = points * 6;
         if (turn) {
-            var el = $("#6p1");
-            player1.six = points * 6;
-            el.removeAttr('onclick');
-            el.text(JSON.stringify(player1.six));
+            checkTurn(player1, 1, 'six', pointsPlay);
         } else {
-            var el = $("#6p2");
-            player2.six = points * 6;
-            el.removeAttr('onclick');
-            el.text(JSON.stringify(player2.six));
+            checkTurn(player2, 2, 'six', pointsPlay);
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
     }
 }
 
-function checkEscalera() {
+function checkEscaleraNew() {
+    console.log("checkEscaleraNew");
     if (!disableClicks) {
         audioCheckScore.play();
         disableClicks = true;
+        var pointsPlay;
         strValues = checkGame();
         if (escaleraRegex.test(strValues) === true) {
+            pointsPlay = 20;
             if (throwN === 2) {
-                if (turn) {
-                    var el = $("#escalerap1");
-                    player1.escalera = 25;
-                    el.removeAttr('onclick');
-                    el.text(JSON.stringify(player1.escalera));
-                } else {
-                    var el = $("#escalerap2");
-                    player2.escalera = 25;
-                    el.removeAttr('onclick');
-                    el.text(JSON.stringify(player2.escalera));
-                }
-            } else {
-                if (turn) {
-                    var el = $("#escalerap1");
-                    player1.escalera = 20;
-                    el.removeAttr('onclick');
-                    el.text(JSON.stringify(player1.escalera));
-                } else {
-                    var el = $("#escalerap2");
-                    player2.escalera = 20;
-                    el.removeAttr('onclick');
-                    el.text(JSON.stringify(player2.escalera));
-                }
+                pointsPlay += 5;
             }
         } else {
-            if (turn) {
-                var el = $("#escalerap1");
-                player1.escalera = 0;
-                el.removeAttr('onclick');
-                el.text(JSON.stringify(player1.escalera));
-            } else {
-                var el = $("#escalerap2");
-                player2.escalera = 0;
-                el.removeAttr('onclick');
-                el.text(JSON.stringify(player2.escalera));
-            }
+            pointsPlay = 0;
+        }
+        if (turn) {
+            checkTurn(player1, 1, 'escalera', pointsPlay);
+        } else {
+            checkTurn(player2, 2, 'escalera', pointsPlay);
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
     }
 }
 
-function checkFull() {
+function checkFullNew() {
+    console.log("checkFullNew");
     if (!disableClicks) {
         audioCheckScore.play();
         disableClicks = true;
+        var pointsPlay;
         strValues = checkGame();
         if (fullRegex2.test(strValues) === true) {
-            console.log("estoy en true full");
+            pointsPlay = 30;
             if (throwN === 2) {
-                console.log("estoy en throwN 1 full");
-                if (turn) {
-                    var el = $("#fullp1");
-                    player1.full = 35;
-                    el.removeAttr('onclick');
-                    el.text(JSON.stringify(player1.full));
-                } else {
-                    var el = $("#fullp2");
-                    player2.full = 35;
-                    el.removeAttr('onclick');
-                    el.text(JSON.stringify(player2.full));
-                }
-            } else {
-                if (turn) {
-                    var el = $("#fullp1");
-                    player1.full = 30;
-                    el.removeAttr('onclick');
-                    el.text(JSON.stringify(player1.full));
-                } else {
-                    var el = $("#fullp2");
-                    player2.full = 30;
-                    el.removeAttr('onclick');
-                    el.text(JSON.stringify(player2.full));
-                }
+                pointsPlay += 5;
             }
         } else {
-            if (turn) {
-                var el = $("#fullp1");
-                player1.full = 0;
-                el.removeAttr('onclick');
-                el.text(JSON.stringify(player1.full));
-            } else {
-                var el = $("#fullp2");
-                player2.full = 0;
-                el.removeAttr('onclick');
-                el.text(JSON.stringify(player2.full));
-            }
+            pointsPlay = 0;
+        }
+        if (turn) {
+            checkTurn(player1, 1, 'full', pointsPlay);
+        } else {
+            checkTurn(player2, 2, 'full', pointsPlay);
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
     }
 }
 
-function checkPoker() {
+function checkPokerNew() {
+    console.log("checkPokerNew");
     if (!disableClicks) {
         audioCheckScore.play();
         disableClicks = true;
+        var pointsPlay;
         strValues = checkGame();
         if (pokerRegex.test(strValues) === true) {
-            console.log("estoy en true poker");
+            pointsPlay = 40;
             if (throwN === 2) {
-                console.log("estoy en throwN 1 poker");
-                if (turn) {
-                    var el = $("#pokerp1");
-                    player1.poker = 45;
-                    el.removeAttr('onclick');
-                    el.text(JSON.stringify(player1.poker));
-                } else {
-                    var el = $("#pokerp2");
-                    player2.poker = 45;
-                    el.removeAttr('onclick');
-                    el.text(JSON.stringify(player2.poker));
-                }
-            } else {
-                if (turn) {
-                    var el = $("#pokerp1");
-                    player1.poker = 40;
-                    el.removeAttr('onclick');
-                    el.text(JSON.stringify(player1.poker));
-                } else {
-                    var el = $("#pokerp2");
-                    player2.poker = 40;
-                    el.removeAttr('onclick');
-                    el.text(JSON.stringify(player2.poker));
-                }
+                pointsPlay += 5;
             }
         } else {
-            console.log("estoy en false poker");
-            if (turn) {
-                var el = $("#pokerp1");
-                player1.poker = 0;
-                el.removeAttr('onclick');
-                el.text(JSON.stringify(player1.poker));
-            } else {
-                var el = $("#pokerp2");
-                player2.poker = 0;
-                el.removeAttr('onclick');
-                el.text(JSON.stringify(player2.poker));
-            }
+            pointsPlay = 0;
+        }
+        if (turn) {
+            checkTurn(player1, 1, 'poker', pointsPlay);
+        } else {
+            checkTurn(player2, 2, 'poker', pointsPlay);
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
     }
 }
 
-function checkGenerala() {
+function checkGeneralaNew() {
+    console.log("checkGeneralaNew");
     if (!disableClicks) {
         audioCheckScore.play();
         disableClicks = true;
+        var pointsPlay;
         strValues = checkGame();
-        if (generalaRegex.test(strValues) === true) {
-            if (throwN === 2) {
-                if (turn) {
-                    var el = $("#generalap1");
-                    player1.generala = 300;
-                    setTimeout(win, 2000);
-                } else {
-                    var el = $("#generalap2");
-                    player2.generala = 300;
-                    setTimeout(win, 3000);
-                }
-            } else {
-                if (turn) {
-                    var el = $("#generalap1");
-                    player1.generala = 50;
-                    el.removeAttr('onclick');
-                    el.text(JSON.stringify(player1.generala));
-                } else {
-                    var el = $("#generalap2");
-                    player2.generala = 50;
-                    el.removeAttr('onclick');
-                    el.text(JSON.stringify(player2.generala));
-                }
-            }
+        if (fullRegex2.test(strValues) === true) {
+            pointsPlay = 50;
         } else {
-            if (turn) {
-                var el = $("#generalap1");
-                player1.generala = 0;
-                el.removeAttr('onclick');
-                el.text(JSON.stringify(player1.generala));
-            } else {
-                var el = $("#generalap2");
-                player2.generala = 0;
-                el.removeAttr('onclick');
-                el.text(JSON.stringify(player2.generala));
-            }
+            pointsPlay = 0;
+        }
+        if (turn) {
+            checkTurn(player1, 1, 'generala', pointsPlay);
+        } else {
+            checkTurn(player2, 2, 'generala', pointsPlay);
         }
         $('#button_throw').text('Cambiar turno');
         $('#button_throw').attr('onclick', 'throwDices()');
     }
+}
+
+function checkTurn(player, number, game, points) {
+    console.log("checkTurn");
+    var el = $('#' + game + 'p' + number);
+    player[game] = points;
+    el.removeAttr('onclick');
+    console.log(JSON.stringify(player[game]));
+    el.text(JSON.stringify(player[game]));
 }
 
 function checkGeneralaServida() {
     console.log("Generala servida");
-    audioCheckScore.play();
-    disableClicks = true;
+    /* audioCheckScore.play(); */
+    /* disableClicks = true; */
     strValues = checkGame();
     console.log(strValues);
     if (generalaRegex.test(strValues) === true) {
