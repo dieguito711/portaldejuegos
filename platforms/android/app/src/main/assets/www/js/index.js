@@ -78,6 +78,7 @@ var pointsP2 = document.getElementById('points_p2');
 var divData = document.getElementById('player-data');
 var divLinks = document.getElementById('enterLinks');
 var players = [];
+
 //Variable to know which player is on editing mode
 var editingPlayers = true; //TRUE = P1, FALSE = P2
 
@@ -86,8 +87,8 @@ setTimeout(function () {
     myStorage = window.localStorage;
     if (typeof myStorage !== 'undefined') {
         if (myStorage.getItem('Players') === null) {
+            //No players loaded in localStorage, show div to add new players
             divData.classList.remove('dissapear');
-            console.log("log0.5");
         } else {
             players = JSON.parse(myStorage.getItem('Players'));
             //If there are already 2 players
@@ -99,21 +100,14 @@ setTimeout(function () {
             } else {
                 //If there are less than 2 players, user have to add one more at least
                 divData.classList.remove('dissapear');
-                console.log("log1");
                 showPlayersData(players.length);
             }
-            /* divData.classList.remove('dissapear');
-            console.log("log2"); */
         }
     } else {
-        /* divData.classList.remove('dissapear');
-        console.log("log3"); */
         // localStorage not defined
     }
     document.getElementById('loader').classList.add('dissapear');
 }, 1000);
-
-
 //LocalStorage
 /* myStorage = window.localStorage;
 if (typeof myStorage !== 'undefined') {
@@ -143,21 +137,15 @@ function showPlayersData(n) {
         divP1.classList.remove('dissapear');
         divP2.classList.add('dissapear');
         imgP1.src = players[0].img;
-        console.log(players[0].img);
         nameP1.innerText = players[0].name;
-        console.log(players[0].name);
         pointsP1.innerText = "Puntos: " + players[0].points;
-        console.log(players[0].points);
         if (n > 1) {
             divData.classList.add('dissapear');
             divP2.classList.remove('dissapear');
             divLinks.classList.remove('dissapear');
             imgP2.src = players[1].img;
-            console.log(players[1].img);
             nameP2.innerText = players[1].name;
-            console.log(players[1].name);
             pointsP2.innerText = "Puntos: " + players[1].points;
-            console.log(players[1].points);
         }
     }
 }
